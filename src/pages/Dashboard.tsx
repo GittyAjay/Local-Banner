@@ -8,7 +8,7 @@ import MIcon from 'react-native-vector-icons/AntDesign';
 import { Image, View, Text, StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default function Dashboard() {
+export default function Dashboard(props: { navigation: { push: Function } }) {
 
     const { ANIM_WIDTH, ANIM_HEIGHT, BUTTON_HEIGHT, DEFAUTL_SPACE, FONT_MID, FONT_LARGE, HEIGHT, INLINE_GAP, WIDTH, ICON_SIZE } = Numericals();
 
@@ -16,7 +16,7 @@ export default function Dashboard() {
         <View style={[styles.container, { backgroundColor: `${Colors.BLUE.SIMPLE}` }]}>
             <StatusBar color={`${Colors.BLUE.SIMPLE}`} />
             <Animated.View style={[styles.logo_animation_desc_container, { height: HEIGHT * 2 / 3, width: WIDTH }]}>
-                <Image source={require('../assets/images/logo.png')} />
+                <Text style={{ fontFamily: "BodoniModa-ExtraBold", fontSize: 50, color: 'white' }}>FRU</Text>
                 <LottieView
                     style={[styles.animation, {
                         width: ANIM_WIDTH,
@@ -34,7 +34,7 @@ export default function Dashboard() {
                         width: WIDTH - INLINE_GAP, height: BUTTON_HEIGHT, padding: DEFAUTL_SPACE,
                         marginBottom: DEFAUTL_SPACE,
                     }]}
-                    onPress={() => console.log("click me")}
+                    onPress={() => props.navigation.push('Auth')}
                 >
                     <View style={[styles.inner_button, { flexGrow: 1.1 }]}>
                         <Text style={[styles.button_txt, { fontSize: FONT_MID, }]}>Get Started</Text>

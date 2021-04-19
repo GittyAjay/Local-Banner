@@ -17,6 +17,9 @@ export function Numericals() {
         ICON_SIZE: 23,
         ANIM_WIDTH: 300,
         ANIM_HEIGHT: 250,
+        BORDER_WIDTH: 1,
+        BORDER_RADIUS: 10,
+
     }
 }
 
