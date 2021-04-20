@@ -30,11 +30,11 @@ export default function Splash(props: { navigation: { push: Function } }) {
         <View style={[styles.container, { backgroundColor: `${Colors.BLACK}` }]}>
             <StatusBar color={Colors.BLACK} />
             <Animated.View style={[styles.animation]}>
-                <Text style={[styles.Text_style, { fontSize: 60, color: `${Colors.WHITE}` },]}>F</Text>
+                <Text style={[styles.Text_style, { fontSize: 60, color: Colors.WHITE },]}>F</Text>
                 <Animated.View style={[{ transform: [{ rotateZ: interpolatedBackRotate }] }]}>
-                    <Text style={[styles.Text_style, { fontSize: 60, color: `${Colors.WHITE}` }]}>R</Text>
+                    <Text style={[styles.Text_style, { fontSize: 60, color: Colors.WHITE }]}>R</Text>
                 </Animated.View>
-                <Text style={[styles.Text_style, { fontSize: 60, color: `${Colors.WHITE}` }]}>U</Text>
+                <Text style={[styles.Text_style, { fontSize: 60, color: Colors.WHITE }]}>U</Text>
             </Animated.View>
         </View >
     )

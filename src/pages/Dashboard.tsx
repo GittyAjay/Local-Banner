@@ -16,7 +16,7 @@ export default function Dashboard(props: { navigation: { push: Function } }) {
         <View style={[styles.container, { backgroundColor: `${Colors.BLUE.SIMPLE}` }]}>
             <StatusBar color={`${Colors.BLUE.SIMPLE}`} />
             <Animated.View style={[styles.logo_animation_desc_container, { height: HEIGHT * 2 / 3, width: WIDTH }]}>
-                <Text style={{ fontFamily: "BodoniModa-ExtraBold", fontSize: 50, color: 'white' }}>FRU</Text>
+                <Text style={{ fontFamily: "BodoniModa-ExtraBold", fontSize: 50, color: Colors.WHITE }}>FRU</Text>
                 <LottieView
                     style={[styles.animation, {
                         width: ANIM_WIDTH,
