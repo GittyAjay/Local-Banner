@@ -7,14 +7,14 @@ export function Numericals() {
     return {
         WIDTH: width,
         HEIGHT: height,
-        INLINE_GAP: 30,
+        INLINE_GAP: 20,
         FONT_ELARGE: 27,
         FONT_FLARGE: 30,
         FONT_GLARGE: 35,
         FONT_LARGE: 23,
         FONT_MID: 18,
         FONT_SMALL: 13,
-        BUTTON_HEIGHT: 62,
+        BUTTON_HEIGHT: 50,
         DEFAUTL_SPACE: 10,
         ICON_SIZE: 23,
         ANIM_WIDTH: 300,
@@ -22,7 +22,6 @@ export function Numericals() {
         BORDER_WIDTH: 1,
         BORDER_RADIUS: 10,
         BORDER_RADIUS_CIRCULAR: 30
-
     }
 }
 

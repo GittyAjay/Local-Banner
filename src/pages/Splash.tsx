@@ -6,7 +6,7 @@ import { Numericals } from '../constants/numerical';
 import StatusBar from '../styles/statusBar';
 
 export default function Splash(props: { navigation: { push: Function } }) {
-    const { FONT_FLARGE, FONT_GLARGE } = Numericals();
+    const { FONT_GLARGE } = Numericals();
     const anim = useRef(new Animated.Value(0)).current;
     console.log(typeof (props));
 

@@ -9,8 +9,9 @@ import FIcon from 'react-native-vector-icons/Fontisto';
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import CountryCode from '../components/CountryCode';
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 export default function Auth() {
-    const { WIDTH, ICON_SIZE, DEFAUTL_SPACE, FONT_ELARGE, FONT_SMALL, FONT_MID, BORDER_WIDTH, BORDER_RADIUS } = Numericals();
+    const { ICON_SIZE, DEFAUTL_SPACE, FONT_LARGE, FONT_SMALL, BORDER_WIDTH, BORDER_RADIUS, INLINE_GAP } = Numericals();
     const [username, setUserName] = useState('');
     const [placeholder, setPlaceholder] = useState('Phone number');
     const [sizeChanger, setsizeChanger] = useState(0);
@@ -20,45 +21,45 @@ export default function Auth() {
     return (
         <>
             <ScrollView style={{ backgroundColor: Colors.WHITE }}>
-                <View style={[styles.container, { backgroundColor: Colors.WHITE, paddingHorizontal: 2 * DEFAUTL_SPACE }]}>
+                <View style={[styles.container, { backgroundColor: Colors.WHITE, paddingHorizontal: moderateScale(INLINE_GAP) }]}>
                     <StatusBarTemplate color={Colors.WHITE} />
-
-                    <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
-                        <View style={styles.closeButton}>
+                    <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <View style={[styles.closeButton]}>
                             <TouchableOpacity>
-                                <AIcon name="close" color={Colors.BLACK} size={ICON_SIZE} />
+                                <AIcon name="close" color={Colors.BLACK} size={moderateScale(moderateScale(ICON_SIZE))} />
                             </TouchableOpacity>
                         </View>
-                        <View style={styles.heading}>
-                            <Text style={[styles.heading_txt, { fontSize: FONT_ELARGE }]}>Log in or sign up to Fru</Text>
+                        <View style={[styles.heading, { marginVertical: moderateScale(moderateScale(DEFAUTL_SPACE)) }]}>
+                            <Text style={[styles.heading_txt, { fontSize: scale(FONT_LARGE) }]}>Log in or sign up to Fru</Text>
                         </View>
-                        <View style={{ flexDirection: 'column' }}>
+                        <View style={[{ flex: 1, flexDirection: 'column', alignItems: 'flex-start' }]}>
                             <View style={[styles.topCorner_input_box, {
                                 borderColor: Colors.GREY.LIGHT,
-                                paddingLeft: DEFAUTL_SPACE,
-                                paddingBottom: DEFAUTL_SPACE / 2,
-                                paddingTop: DEFAUTL_SPACE / 2,
+                                paddingLeft: moderateScale(DEFAUTL_SPACE),
+                                paddingBottom: moderateScale(DEFAUTL_SPACE) / 2,
+                                paddingTop: moderateScale(DEFAUTL_SPACE) / 2,
                                 borderWidth: BORDER_WIDTH,
                                 borderTopLeftRadius: BORDER_RADIUS,
                                 borderTopEndRadius: BORDER_RADIUS,
-                                marginBottom: sizeChanger * -6
+                                marginBottom: sizeChanger * -6,
+                                alignSelf: 'stretch'
                             }]}>
                                 <View>
-                                    <Text style={{ color: Colors.GREY.LIGHT, fontSize: FONT_SMALL, fontFamily: 'Comfortaa-Bold' }}>Country/Region</Text>
-                                    <View style={{ flexDirection: 'row', paddingBottom: DEFAUTL_SPACE }}>
-                                        <Text style={{ color: Colors.BLACK, fontSize: FONT_MID, fontFamily: 'Comfortaa-Bold' }}>India</Text>
-                                        <Text style={{ color: Colors.BLACK, fontSize: FONT_MID, fontFamily: 'Comfortaa-Bold' }}>( +91 )</Text>
+                                    <Text style={{ color: Colors.GREY.LIGHT, fontSize: scale(FONT_SMALL), fontFamily: 'Comfortaa-Bold' }}>Country/Region</Text>
+                                    <View style={{ flexDirection: 'row', paddingBottom: moderateScale(DEFAUTL_SPACE) }}>
+                                        <Text style={{ color: Colors.BLACK, fontSize: scale(FONT_SMALL), fontFamily: 'Comfortaa-Bold' }}>India</Text>
+                                        <Text style={{ color: Colors.BLACK, fontSize: scale(FONT_SMALL), fontFamily: 'Comfortaa-Bold' }}>( +91 )</Text>
                                     </View>
                                 </View>
                                 <View style={{ justifyContent: 'center', alignItems: 'center' }} >
                                     <Pressable style={({ pressed }) => [{ opacity: pressed ? 0.3 : 1 }]} onPress={e => setCountryCode(1)}>
-                                        <AIcon name="down" size={ICON_SIZE} color={Colors.BLACK} style={{ padding: 10 }} />
+                                        <AIcon name="down" size={moderateScale(moderateScale(ICON_SIZE))} color={Colors.BLACK} style={{ padding: 10 }} />
                                     </Pressable>
                                 </View>
                             </View>
                             <View style={[styles.buttomCorner_input_box, {
                                 borderColor: username.length < 10 && username.length > 0 ? Colors.RED : Colors.GREY.LIGHT,
-                                paddingLeft: DEFAUTL_SPACE,
+                                paddingLeft: moderateScale(DEFAUTL_SPACE),
                                 borderWidth: BORDER_WIDTH,
                                 borderTopLeftRadius: sizeChanger * BORDER_RADIUS,
                                 borderTopEndRadius: sizeChanger * BORDER_RADIUS,
@@ -73,23 +74,23 @@ export default function Auth() {
                                         onChangeText={user => { setUserName(user); }}
                                         defaultValue={username}
                                         maxLength={maxPhoneNumber}
-                                        style={{ fontSize: FONT_MID, fontFamily: 'Comfortaa-Bold' }}
+                                        style={{ fontSize: scale(FONT_SMALL), fontFamily: 'Comfortaa-Bold' }}
                                         placeholder={placeholder}
                                         keyboardType="phone-pad" />
                                 </View>
-                                <View style={{ padding: DEFAUTL_SPACE }}>
-                                    <AIcon name="check" color={username.length < 10 ? Colors.WHITE : Colors.BLACK} size={ICON_SIZE} />
+                                <View style={{ padding: moderateScale(DEFAUTL_SPACE) }}>
+                                    <AIcon name="check" color={username.length < 10 ? Colors.WHITE : Colors.BLACK} size={moderateScale(moderateScale(ICON_SIZE))} />
                                 </View>
                             </View>
                             <View>
-                                <Text style={{ marginTop: DEFAUTL_SPACE }}>We'ill call you or text you to confirm your number.Standard message and data rates apply</Text>
+                                <Text style={{ marginTop: moderateScale(DEFAUTL_SPACE), fontSize: scale(FONT_SMALL) }}>We'ill call you or text you to confirm your number.Standard message and data rates apply</Text>
                             </View>
                         </View>
-                        <View style={styles.button_container}>
+                        <View style={[styles.button_container, { marginVertical: 10, }]}>
                             <Pressable style={({ pressed }) => [
-                                { transform: [{ scale: pressed ? 0.94 : 1 },], borderRadius: BORDER_RADIUS, padding: DEFAUTL_SPACE, backgroundColor: username.length < 10 ? Colors.GREY.LIGHT : Colors.PRIMARY }, styles.button
+                                { transform: [{ scale: pressed ? 0.94 : 1 },], borderRadius: BORDER_RADIUS, padding: moderateScale(DEFAUTL_SPACE), backgroundColor: username.length < 10 ? Colors.GREY.LIGHT : Colors.PRIMARY }, styles.button
                             ]}>
-                                <Text style={{ color: Colors.WHITE, fontFamily: 'Comfortaa-Bold', fontSize: FONT_MID }}>Continue</Text>
+                                <Text style={{ color: Colors.WHITE, fontFamily: 'Comfortaa-Bold', fontSize: scale(FONT_SMALL) }}>Continue</Text>
                             </Pressable>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
@@ -99,36 +100,36 @@ export default function Auth() {
                         </View>
                     </View>
                     <View style={[styles.social_buttons]}>
-                        <View style={styles.button_container}>
+                        <View style={[styles.button_container, { marginVertical: 10, }]}>
                             <Pressable style={({ pressed }) => [
-                                { transform: [{ scale: pressed ? 0.94 : 1 },], backgroundColor: pressed ? Colors.IVORY : Colors.WHITE, borderRadius: BORDER_RADIUS, padding: DEFAUTL_SPACE, }, styles.border_button
+                                { transform: [{ scale: pressed ? 0.94 : 1 },], backgroundColor: pressed ? Colors.IVORY : Colors.WHITE, borderRadius: BORDER_RADIUS, padding: moderateScale(DEFAUTL_SPACE), }, styles.border_button
                             ]}>
-                                <FIcon name="email" color="black" size={ICON_SIZE} style={{ flexGrow: 1 }} />
-                                <Text style={{ color: Colors.BLACK, fontFamily: 'Comfortaa-Bold', fontSize: FONT_MID, flexGrow: 1.5 }}>Continue with Email</Text>
+                                <FIcon name="email" color="black" size={moderateScale(ICON_SIZE)} style={{ flexGrow: 1 }} />
+                                <Text style={{ color: Colors.BLACK, fontFamily: 'Comfortaa-Bold', fontSize: scale(FONT_SMALL), flexGrow: 1.2 }}>Continue with Email</Text>
                             </Pressable>
                         </View>
-                        <View style={styles.button_container}>
+                        <View style={[styles.button_container, { marginVertical: 10, }]}>
                             <Pressable style={({ pressed }) => [
-                                { transform: [{ scale: pressed ? 0.94 : 1 },], backgroundColor: pressed ? Colors.IVORY : Colors.WHITE, borderRadius: BORDER_RADIUS, padding: DEFAUTL_SPACE, }, styles.border_button
+                                { transform: [{ scale: pressed ? 0.94 : 1 },], backgroundColor: pressed ? Colors.IVORY : Colors.WHITE, borderRadius: BORDER_RADIUS, padding: moderateScale(DEFAUTL_SPACE), }, styles.border_button
                             ]}>
-                                <MIcon name="facebook" color="blue" size={ICON_SIZE} style={{ flexGrow: 1 }} />
-                                <Text style={{ color: Colors.BLACK, fontFamily: 'Comfortaa-Bold', fontSize: FONT_MID, flexGrow: 1.5 }}>Continue with Facebook</Text>
+                                <MIcon name="facebook" color="blue" size={moderateScale(ICON_SIZE)} style={{ flexGrow: 1 }} />
+                                <Text style={{ color: Colors.BLACK, fontFamily: 'Comfortaa-Bold', fontSize: scale(FONT_SMALL), flexGrow: 1.5 }}>Continue with Facebook</Text>
                             </Pressable>
                         </View>
-                        <View style={styles.button_container}>
+                        <View style={[styles.button_container, { marginVertical: 10 }]}>
                             <Pressable style={({ pressed }) => [
-                                { transform: [{ scale: pressed ? 0.94 : 1 },], backgroundColor: pressed ? Colors.IVORY : Colors.WHITE, borderRadius: BORDER_RADIUS, padding: DEFAUTL_SPACE, }, styles.border_button
+                                { transform: [{ scale: pressed ? 0.94 : 1 },], backgroundColor: pressed ? Colors.IVORY : Colors.WHITE, borderRadius: BORDER_RADIUS, padding: moderateScale(DEFAUTL_SPACE), }, styles.border_button
                             ]}>
-                                <FAIcon name="google" color="orange" size={ICON_SIZE} style={{ flexGrow: 1 }} />
-                                <Text style={{ color: Colors.BLACK, fontFamily: 'Comfortaa-Bold', fontSize: FONT_MID, flexGrow: 1.5 }}>Continue with Facebook</Text>
+                                <FAIcon name="google" color="orange" size={moderateScale(ICON_SIZE)} style={{ flexGrow: 1 }} />
+                                <Text style={{ color: Colors.BLACK, fontFamily: 'Comfortaa-Bold', fontSize: scale(FONT_SMALL), flexGrow: 1.5 }}>Continue with Facebook</Text>
                             </Pressable>
                         </View>
-                        <View style={styles.button_container}>
+                        <View style={[styles.button_container, { marginVertical: 10 }]}>
                             <Pressable style={({ pressed }) => [
-                                { transform: [{ scale: pressed ? 0.94 : 1 },], backgroundColor: pressed ? Colors.IVORY : Colors.WHITE, borderRadius: BORDER_RADIUS, padding: DEFAUTL_SPACE, }, styles.border_button
+                                { transform: [{ scale: pressed ? 0.94 : 1 },], backgroundColor: pressed ? Colors.IVORY : Colors.WHITE, borderRadius: BORDER_RADIUS, padding: moderateScale(DEFAUTL_SPACE), }, styles.border_button
                             ]}>
-                                <FAIcon name="apple" color="black" size={ICON_SIZE} style={{ flexGrow: 1 }} />
-                                <Text style={{ color: Colors.BLACK, fontFamily: 'Comfortaa-Bold', fontSize: FONT_MID, flexGrow: 1.5 }}>Continue with Apple</Text>
+                                <FAIcon name="apple" color="black" size={moderateScale(ICON_SIZE)} style={{ flexGrow: 1 }} />
+                                <Text style={{ color: Colors.BLACK, fontFamily: 'Comfortaa-Bold', fontSize: scale(FONT_SMALL), flexGrow: 1.5 }}>Continue with Apple</Text>
                             </Pressable>
                         </View>
 
@@ -154,7 +155,6 @@ const styles = StyleSheet.create({
     },
     heading: {
         alignSelf: 'flex-start',
-        marginVertical: 10
     },
     heading_txt: {
         fontFamily: 'Comfortaa-Bold',
@@ -175,7 +175,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 10
     },
     button: {
         flex: 1,
@@ -187,7 +186,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'space-between',
-        marginBottom: 10
     },
     border_button: {
         flex: 1,

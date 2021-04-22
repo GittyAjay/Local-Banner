@@ -1,51 +1,112 @@
 import Animated from 'react-native-reanimated';
 import { Colors } from '../constants/color'
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import StatusBar from '../styles/statusBar'
 import LottieView from 'lottie-react-native'
 import { Numericals } from '../constants/numerical';
 import MIcon from 'react-native-vector-icons/AntDesign';
 import { View, Text, StyleSheet, Pressable } from 'react-native'
-
+import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+import Carousel from 'react-native-snap-carousel';
+import { SafeAreaView } from 'react-native-safe-area-context';
 export default function Dashboard(props: { navigation: { push: Function } }) {
 
-    const { ANIM_WIDTH, ANIM_HEIGHT, BUTTON_HEIGHT, DEFAUTL_SPACE, FONT_MID, FONT_LARGE, FONT_FLARGE, FONT_GLARGE, FONT_SMALL, HEIGHT, INLINE_GAP, WIDTH, ICON_SIZE, BORDER_RADIUS_CIRCULAR } = Numericals();
-
-    return (
-        <View style={[styles.container, { backgroundColor: Colors.PRIMARY }]}>
-            <StatusBar color={Colors.PRIMARY} />
-            <Animated.View style={[styles.logo_animation_desc_container, { height: HEIGHT * 6 / 10, width: WIDTH }]}>
-                <Text style={[styles.logo, { fontSize: FONT_GLARGE, color: Colors.WHITE }]}>Okfind</Text>
-                <Text style={[styles.description, { fontSize: FONT_LARGE, color: Colors.WHITE }]}>Search Your Feed</Text>
-                <Text style={[styles.description, { fontSize: FONT_SMALL, color: Colors.WHITE }]}>We Find For You</Text>
+    const { BUTTON_HEIGHT, DEFAUTL_SPACE, FONT_SMALL, FONT_LARGE, FONT_MID, HEIGHT, WIDTH, BORDER_RADIUS_CIRCULAR, INLINE_GAP } = Numericals();
+    const [activeIndex, setActiveIndex] = useState(1);
+    const Slides = [
+        {
+            title: "Search Your Feed",
+            descrption: 'we can search all your need here',
+            url: require("../assets/images/welcome1.json"),
+            index: 1
+        },
+        {
+            title: "Find Nearby",
+            descrption: 'Everthing nearby like cook,pg,hotels(oyo bhai)',
+            url: require("../assets/images/welcome2.json"),
+            index: 2
+        },
+        {
+            title: "Book Pg",
+            descrption: 'Book Pg in minute',
+            url: require("../assets/images/welcome3.json"),
+            index: 3
+        },
+        {
+            title: "Find more",
+            descrption: 'We have more things,explore here',
+            url: require("../assets/images/welcome4.json"),
+            index: 4
+        },
+    ];
+    const renderItem = ({ item, index }: { item: any, index: number }) => {
+        return (
+            <View style={{
+                flex: 1,
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                alignItems: 'center'
+            }}>
+                <View>
+                    <Text style={[styles.description, { fontSize: scale(FONT_LARGE), color: Colors.WHITE }]}>{item.title}</Text>
+                </View>
+                <View style={{ marginVertical: DEFAUTL_SPACE }}>
+                    <Text style={[styles.description, { fontSize: scale(FONT_SMALL), color: Colors.WHITE }]}>{item.descrption}</Text>
+                </View>
                 <LottieView
-                    style={[{
-                        width: ANIM_WIDTH,
-                        height: ANIM_HEIGHT
-                    }]}
-                    source={require('../assets/images/welcome.json')}
+                    style={{ marginTop: scale(50) }}
+                    source={item.url}
                     autoPlay
                     loop
                 />
 
+            </View>
+        )
+    }
+    return (
+        <SafeAreaView style={[styles.container, { backgroundColor: Colors.PRIMARY }]}>
+            <StatusBar color={Colors.PRIMARY} />
+            <Animated.View style={[styles.FONT_ELARGE_animation_desc_container, { height: verticalScale(HEIGHT * 6 / 10), width: scale(WIDTH) }]}>
+                <View style={{ marginVertical: DEFAUTL_SPACE }}>
+                    <Text style={[styles.FONT_ELARGE, { fontSize: scale(FONT_LARGE), color: Colors.WHITE, marginTop: DEFAUTL_SPACE }]}>Okfind</Text>
+                </View>
+                <View style={{ height: moderateScale(280) }}>
+                    <Carousel
+                        layout={'default'}
+                        data={Slides}
+                        sliderWidth={600}
+                        autoplay={true}
+                        enableMomentum={false}
+                        lockScrollWhileSnapping={true}
+                        layoutCardOffset={2}
+                        itemWidth={300}
+                        autoplayInterval={3000}
+                        loop={true}
+                        renderItem={renderItem}
+                        onSnapToItem={index => setActiveIndex(index)} />
+                </View>
             </Animated.View>
             <View style={{ flexDirection: 'row' }}>
-                <View style={[styles.buttom, { height: BUTTON_HEIGHT * 3, marginBottom: DEFAUTL_SPACE * 2 }]}>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: DEFAUTL_SPACE }}>
-                        <Text style={[styles.button_text, { color: Colors.WHITE }]}>0</Text>
-                        <Text style={[styles.button_text, { color: Colors.GREY.SIMPLE }]}>0</Text>
-                        <Text style={[styles.button_text, { color: Colors.GREY.SIMPLE }]}>0</Text>
+                <View style={[styles.buttom, { height: moderateScale(BUTTON_HEIGHT * 3), margin: moderateScale(10) }]}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: moderateScale(4 * DEFAUTL_SPACE) }}>
+                        <View style={{ width: DEFAUTL_SPACE - 1, height: DEFAUTL_SPACE - 1, borderColor: Colors.WHITE, backgroundColor: activeIndex == 0 ? Colors.WHITE : Colors.PRIMARY, borderWidth: 2, borderStyle: 'solid', borderRadius: 20 }}>
+                        </View>
+                        <View style={{ width: DEFAUTL_SPACE - 1, height: DEFAUTL_SPACE - 1, borderColor: Colors.WHITE, backgroundColor: activeIndex == 1 ? Colors.WHITE : Colors.PRIMARY, borderWidth: 2, borderStyle: 'solid', borderRadius: 20, marginHorizontal: DEFAUTL_SPACE / 2 }}>
+                        </View>
+                        <View style={{ width: DEFAUTL_SPACE - 1, height: DEFAUTL_SPACE - 1, borderColor: Colors.WHITE, backgroundColor: activeIndex == 2 ? Colors.WHITE : Colors.PRIMARY, borderWidth: 2, borderStyle: 'solid', borderRadius: 20 }}>
+                        </View>
+                        <View style={{ width: DEFAUTL_SPACE - 1, height: DEFAUTL_SPACE - 1, borderColor: Colors.WHITE, backgroundColor: activeIndex == 3 ? Colors.WHITE : Colors.PRIMARY, borderWidth: 2, borderStyle: 'solid', borderRadius: 20, marginHorizontal: DEFAUTL_SPACE / 2 }}>
+                        </View>
                     </View>
-                    <Pressable style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.9 : 1 }], backgroundColor: pressed ? Colors.GREY.LIGHT : Colors.WHITE, borderRadius: BORDER_RADIUS_CIRCULAR, height: BUTTON_HEIGHT }, styles.button]} onPress={e => props.navigation.push('Auth')}>
-                        <Text style={{ color: Colors.PRIMARY, fontFamily: 'Montserrat-Bold', fontSize: FONT_MID }}>Get Started</Text>
+                    <Pressable style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.9 : 1 }], backgroundColor: pressed ? Colors.GREY.LIGHT : Colors.WHITE, borderRadius: BORDER_RADIUS_CIRCULAR, height: moderateScale(BUTTON_HEIGHT), marginBottom: moderateScale(DEFAUTL_SPACE) }, styles.button]} onPress={e => props.navigation.push('Auth')}>
+                        <Text style={{ color: Colors.PRIMARY, fontFamily: 'Montserrat-Bold', fontSize: scale(FONT_SMALL) }}>Get Started</Text>
                     </Pressable>
-                    <Pressable style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.9 : 1 }], backgroundColor: pressed ? Colors.GREY.SIMPLE : Colors.PRIMARY, borderRadius: BORDER_RADIUS_CIRCULAR, borderColor: Colors.WHITE, borderWidth: 2, borderStyle: 'solid', height: BUTTON_HEIGHT }, styles.button]}>
-                        <Text style={{ color: Colors.WHITE, fontFamily: 'Montserrat-Bold', fontSize: FONT_MID }}>I Already have a Okfind account</Text>
+                    <Pressable style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.9 : 1 }], backgroundColor: pressed ? Colors.GREY.SIMPLE : Colors.PRIMARY, borderRadius: BORDER_RADIUS_CIRCULAR, borderColor: Colors.WHITE, borderWidth: 2, borderStyle: 'solid', height: verticalScale(BUTTON_HEIGHT) }, styles.button]}>
+                        <Text style={{ color: Colors.WHITE, fontFamily: 'Montserrat-Bold', fontSize: scale(FONT_SMALL) }}>I Already have a Okfind account</Text>
                     </Pressable>
                 </View>
             </View>
-
-        </View >
+        </SafeAreaView >
     );
 }
 const styles = StyleSheet.create({
@@ -54,11 +115,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    logo: {
+    FONT_ELARGE: {
         fontFamily: "Montserrat-Bold",
-        marginTop: 20
     },
-    logo_animation_desc_container: {
+    FONT_ELARGE_animation_desc_container: {
         justifyContent: 'space-between',
         alignItems: 'center',
     },
@@ -73,12 +133,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        margin: 10
     },
-
-    button_text: {
+    indicator: {
 
     }
-
 })
 
