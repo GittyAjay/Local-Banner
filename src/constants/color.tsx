@@ -3,7 +3,11 @@ export const Colors = {
     BLUE: { SIMPLE: '#0000FF', Baby_Blue: '#7EC8E3', NAVY_BLUE: '#000C66', DARK_BLUE: '#050A30' },
     WHITE: 'white',
     IVORY: '#EEEDE7',
-    GREY: '#868B8E',
+    GREY: { SIMPLE: '#868B8E', LIGHT: '#BDC3CB' },
     BLACK: 'black',
-    RED: 'red'
+    RED: 'red',
+    PRIMARY: '#5E00D8',
+    SECONDARY: '#8155BA',
+    TIRTARY: '#603F8B',
+
 }

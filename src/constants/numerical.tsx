@@ -9,6 +9,8 @@ export function Numericals() {
         HEIGHT: height,
         INLINE_GAP: 30,
         FONT_ELARGE: 27,
+        FONT_FLARGE: 30,
+        FONT_GLARGE: 35,
         FONT_LARGE: 23,
         FONT_MID: 18,
         FONT_SMALL: 13,
@@ -19,6 +21,7 @@ export function Numericals() {
         ANIM_HEIGHT: 250,
         BORDER_WIDTH: 1,
         BORDER_RADIUS: 10,
+        BORDER_RADIUS_CIRCULAR: 30
 
     }
 }

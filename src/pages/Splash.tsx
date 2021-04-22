@@ -1,10 +1,12 @@
 import React, { useRef, useEffect } from 'react'
 import { Animated, Easing, View, Text, Image, StyleSheet, Button } from 'react-native'
+import { color } from 'react-native-reanimated';
 import { Colors } from '../constants/color';
 import { Numericals } from '../constants/numerical';
 import StatusBar from '../styles/statusBar';
 
 export default function Splash(props: { navigation: { push: Function } }) {
+    const { FONT_FLARGE, FONT_GLARGE } = Numericals();
     const anim = useRef(new Animated.Value(0)).current;
     console.log(typeof (props));
 
@@ -15,8 +17,8 @@ export default function Splash(props: { navigation: { push: Function } }) {
 
     useEffect(() => {
         Animated.timing(anim, {
-            toValue: 5,
-            easing: Easing.ease,
+            toValue: 30,
+            easing: Easing.bounce,
             duration: 1000,
             useNativeDriver: true
         }).start()
@@ -25,16 +27,15 @@ export default function Splash(props: { navigation: { push: Function } }) {
     setTimeout(() => {
         props.navigation.push('Dashboard');
     }, 1200);
-
+    //style={[{ transform: [{ rotateZ: interpolatedBackRotate }] }]}
     return (
-        <View style={[styles.container, { backgroundColor: `${Colors.BLACK}` }]}>
+        <View style={[styles.container, { backgroundColor: Colors.SECONDARY }]}>
             <StatusBar color={Colors.BLACK} />
             <Animated.View style={[styles.animation]}>
-                <Text style={[styles.Text_style, { fontSize: 60, color: Colors.WHITE },]}>F</Text>
-                <Animated.View style={[{ transform: [{ rotateZ: interpolatedBackRotate }] }]}>
-                    <Text style={[styles.Text_style, { fontSize: 60, color: Colors.WHITE }]}>R</Text>
+                <Text style={[styles.Text_style, { fontSize: FONT_GLARGE, color: Colors.WHITE },]}>Ok</Text>
+                <Animated.View >
+                    <Text style={[styles.Text_style, { fontSize: FONT_GLARGE, color: Colors.WHITE }]}>find</Text>
                 </Animated.View>
-                <Text style={[styles.Text_style, { fontSize: 60, color: Colors.WHITE }]}>U</Text>
             </Animated.View>
         </View >
     )
@@ -51,6 +52,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     Text_style: {
-        fontFamily: "BodoniModa-ExtraBold",
+        fontFamily: "Montserrat-Bold",
     }
 })

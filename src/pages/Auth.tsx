@@ -34,7 +34,7 @@ export default function Auth() {
                         </View>
                         <View style={{ flexDirection: 'column' }}>
                             <View style={[styles.topCorner_input_box, {
-                                borderColor: Colors.GREY,
+                                borderColor: Colors.GREY.LIGHT,
                                 paddingLeft: DEFAUTL_SPACE,
                                 paddingBottom: DEFAUTL_SPACE / 2,
                                 paddingTop: DEFAUTL_SPACE / 2,
@@ -44,7 +44,7 @@ export default function Auth() {
                                 marginBottom: sizeChanger * -6
                             }]}>
                                 <View>
-                                    <Text style={{ color: Colors.GREY, fontSize: FONT_SMALL, fontFamily: 'Comfortaa-Bold' }}>Country/Region</Text>
+                                    <Text style={{ color: Colors.GREY.LIGHT, fontSize: FONT_SMALL, fontFamily: 'Comfortaa-Bold' }}>Country/Region</Text>
                                     <View style={{ flexDirection: 'row', paddingBottom: DEFAUTL_SPACE }}>
                                         <Text style={{ color: Colors.BLACK, fontSize: FONT_MID, fontFamily: 'Comfortaa-Bold' }}>India</Text>
                                         <Text style={{ color: Colors.BLACK, fontSize: FONT_MID, fontFamily: 'Comfortaa-Bold' }}>( +91 )</Text>
@@ -57,7 +57,7 @@ export default function Auth() {
                                 </View>
                             </View>
                             <View style={[styles.buttomCorner_input_box, {
-                                borderColor: username.length < 10 && username.length > 0 ? Colors.RED : Colors.GREY,
+                                borderColor: username.length < 10 && username.length > 0 ? Colors.RED : Colors.GREY.LIGHT,
                                 paddingLeft: DEFAUTL_SPACE,
                                 borderWidth: BORDER_WIDTH,
                                 borderTopLeftRadius: sizeChanger * BORDER_RADIUS,
@@ -87,15 +87,15 @@ export default function Auth() {
                         </View>
                         <View style={styles.button_container}>
                             <Pressable style={({ pressed }) => [
-                                { transform: [{ scale: pressed ? 0.94 : 1 },], borderRadius: BORDER_RADIUS, padding: DEFAUTL_SPACE, backgroundColor: username.length < 10 ? Colors.GREY : Colors.RED }, styles.button
+                                { transform: [{ scale: pressed ? 0.94 : 1 },], borderRadius: BORDER_RADIUS, padding: DEFAUTL_SPACE, backgroundColor: username.length < 10 ? Colors.GREY.LIGHT : Colors.PRIMARY }, styles.button
                             ]}>
                                 <Text style={{ color: Colors.WHITE, fontFamily: 'Comfortaa-Bold', fontSize: FONT_MID }}>Continue</Text>
                             </Pressable>
                         </View>
                         <View style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                            <View style={{ borderBottomWidth: 0.5, borderBottomColor: Colors.GREY, flex: 1 }} ></View>
-                            <Text style={{ color: Colors.GREY, marginHorizontal: 5 }}>or</Text>
-                            <View style={{ borderBottomWidth: 0.5, borderBottomColor: Colors.GREY, flex: 1 }} ></View>
+                            <View style={{ borderBottomWidth: 0.5, borderBottomColor: Colors.GREY.LIGHT, flex: 1 }} ></View>
+                            <Text style={{ color: Colors.GREY.LIGHT, marginHorizontal: 5 }}>or</Text>
+                            <View style={{ borderBottomWidth: 0.5, borderBottomColor: Colors.GREY.LIGHT, flex: 1 }} ></View>
                         </View>
                     </View>
                     <View style={[styles.social_buttons]}>
@@ -196,6 +196,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         borderColor: 'black',
         borderStyle: 'solid',
-        borderWidth: 0.5,
+        borderWidth: 1,
     }
 })

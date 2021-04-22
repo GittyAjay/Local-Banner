@@ -5,46 +5,47 @@ import StatusBar from '../styles/statusBar'
 import LottieView from 'lottie-react-native'
 import { Numericals } from '../constants/numerical';
 import MIcon from 'react-native-vector-icons/AntDesign';
-import { Image, View, Text, StyleSheet } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, Pressable } from 'react-native'
 
 export default function Dashboard(props: { navigation: { push: Function } }) {
 
-    const { ANIM_WIDTH, ANIM_HEIGHT, BUTTON_HEIGHT, DEFAUTL_SPACE, FONT_MID, FONT_LARGE, HEIGHT, INLINE_GAP, WIDTH, ICON_SIZE } = Numericals();
+    const { ANIM_WIDTH, ANIM_HEIGHT, BUTTON_HEIGHT, DEFAUTL_SPACE, FONT_MID, FONT_LARGE, FONT_FLARGE, FONT_GLARGE, FONT_SMALL, HEIGHT, INLINE_GAP, WIDTH, ICON_SIZE, BORDER_RADIUS_CIRCULAR } = Numericals();
 
     return (
-        <View style={[styles.container, { backgroundColor: `${Colors.BLUE.SIMPLE}` }]}>
-            <StatusBar color={`${Colors.BLUE.SIMPLE}`} />
-            <Animated.View style={[styles.logo_animation_desc_container, { height: HEIGHT * 2 / 3, width: WIDTH }]}>
-                <Text style={{ fontFamily: "BodoniModa-ExtraBold", fontSize: 50, color: Colors.WHITE }}>FRU</Text>
+        <View style={[styles.container, { backgroundColor: Colors.PRIMARY }]}>
+            <StatusBar color={Colors.PRIMARY} />
+            <Animated.View style={[styles.logo_animation_desc_container, { height: HEIGHT * 6 / 10, width: WIDTH }]}>
+                <Text style={[styles.logo, { fontSize: FONT_GLARGE, color: Colors.WHITE }]}>Okfind</Text>
+                <Text style={[styles.description, { fontSize: FONT_LARGE, color: Colors.WHITE }]}>Search Your Feed</Text>
+                <Text style={[styles.description, { fontSize: FONT_SMALL, color: Colors.WHITE }]}>We Find For You</Text>
                 <LottieView
-                    style={[styles.animation, {
+                    style={[{
                         width: ANIM_WIDTH,
                         height: ANIM_HEIGHT
                     }]}
-                    source={require('../assets/images/animation2.json')}
+                    source={require('../assets/images/welcome.json')}
                     autoPlay
                     loop
                 />
-                <Text style={[styles.description, { fontSize: FONT_LARGE }]}>We Find For You</Text>
+
             </Animated.View>
-            <View >
-                <TouchableOpacity
-                    style={[styles.button, {
-                        width: WIDTH - INLINE_GAP, height: BUTTON_HEIGHT, padding: DEFAUTL_SPACE,
-                        marginBottom: DEFAUTL_SPACE,
-                    }]}
-                    onPress={() => props.navigation.push('Auth')}
-                >
-                    <View style={[styles.inner_button, { flexGrow: 1.1 }]}>
-                        <Text style={[styles.button_txt, { fontSize: FONT_MID, }]}>Get Started</Text>
+            <View style={{ flexDirection: 'row' }}>
+                <View style={[styles.buttom, { height: BUTTON_HEIGHT * 3, marginBottom: DEFAUTL_SPACE * 2 }]}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginBottom: DEFAUTL_SPACE }}>
+                        <Text style={[styles.button_text, { color: Colors.WHITE }]}>0</Text>
+                        <Text style={[styles.button_text, { color: Colors.GREY.SIMPLE }]}>0</Text>
+                        <Text style={[styles.button_text, { color: Colors.GREY.SIMPLE }]}>0</Text>
                     </View>
-                    <View style={[styles.inner_button, { flex: 1, paddingRight: DEFAUTL_SPACE }]}>
-                        <MIcon name="arrowright" size={ICON_SIZE} color={`${Colors.WHITE}`} />
-                    </View>
-                </TouchableOpacity>
+                    <Pressable style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.9 : 1 }], backgroundColor: pressed ? Colors.GREY.LIGHT : Colors.WHITE, borderRadius: BORDER_RADIUS_CIRCULAR, height: BUTTON_HEIGHT }, styles.button]} onPress={e => props.navigation.push('Auth')}>
+                        <Text style={{ color: Colors.PRIMARY, fontFamily: 'Montserrat-Bold', fontSize: FONT_MID }}>Get Started</Text>
+                    </Pressable>
+                    <Pressable style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.9 : 1 }], backgroundColor: pressed ? Colors.GREY.SIMPLE : Colors.PRIMARY, borderRadius: BORDER_RADIUS_CIRCULAR, borderColor: Colors.WHITE, borderWidth: 2, borderStyle: 'solid', height: BUTTON_HEIGHT }, styles.button]}>
+                        <Text style={{ color: Colors.WHITE, fontFamily: 'Montserrat-Bold', fontSize: FONT_MID }}>I Already have a Okfind account</Text>
+                    </Pressable>
+                </View>
             </View>
-        </View>
+
+        </View >
     );
 }
 const styles = StyleSheet.create({
@@ -53,29 +54,31 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
     },
-    logo_animation_desc_container: {
-        justifyContent: 'center',
-        alignItems: 'center'
+    logo: {
+        fontFamily: "Montserrat-Bold",
+        marginTop: 20
     },
-    animation: {
-
+    logo_animation_desc_container: {
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
     description: {
-        fontFamily: "JosefinSans-SemiBold",
+        fontFamily: "Montserrat-SemiBold",
+    },
+    buttom: {
+        flex: 1,
+        justifyContent: 'flex-end',
     },
     button: {
         flexDirection: 'row',
-        alignItems: "center",
         justifyContent: 'center',
-        backgroundColor: "black",
+        alignItems: 'center',
+        margin: 10
     },
-    button_txt: {
-        color: 'white',
-        fontWeight: 'bold',
-    },
-    inner_button: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end'
-    },
+
+    button_text: {
+
+    }
+
 })
 
