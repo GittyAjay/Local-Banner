@@ -10,7 +10,8 @@ import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import CountryCode from '../components/CountryCode';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
-export default function Auth() {
+
+export default function Auth(props: { navigation: { push: Function } }) {
     const { ICON_SIZE, DEFAUTL_SPACE, FONT_LARGE, FONT_SMALL, BORDER_WIDTH, BORDER_RADIUS, INLINE_GAP } = Numericals();
     const [username, setUserName] = useState('');
     const [placeholder, setPlaceholder] = useState('Phone number');
@@ -87,7 +88,7 @@ export default function Auth() {
                             </View>
                         </View>
                         <View style={[styles.button_container, { marginVertical: 10, }]}>
-                            <Pressable style={({ pressed }) => [
+                            <Pressable onPress={e => props.navigation.push('Otp')} style={({ pressed }) => [
                                 { transform: [{ scale: pressed ? 0.94 : 1 },], borderRadius: BORDER_RADIUS, padding: moderateScale(DEFAUTL_SPACE), backgroundColor: username.length < 10 ? Colors.GREY.LIGHT : Colors.PRIMARY }, styles.button
                             ]}>
                                 <Text style={{ color: Colors.WHITE, fontFamily: 'Comfortaa-Bold', fontSize: scale(FONT_SMALL) }}>Continue</Text>

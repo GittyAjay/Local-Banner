@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
 import Splash from '../pages/Splash';
 import AuthDashboard from '../pages/Auth';
+import Otp from '../pages/Otp';
 
 const { Navigator, Screen } = createStackNavigator();
 // headerMode='none'
@@ -14,6 +15,7 @@ const HomeNavigator = () => (
         <Screen name='Dashboard' component={Dashboard} />
         <Screen name='Home' component={Home} />
         <Screen name='Auth' component={AuthDashboard} />
+        <Screen name='Otp' component={Otp} />
     </Navigator>
 );
 
