@@ -88,7 +88,7 @@ export default function Auth(props: { navigation: { push: Function } }) {
                             </View>
                         </View>
                         <View style={[styles.button_container, { marginVertical: 10, }]}>
-                            <Pressable onPress={e => props.navigation.push('Otp')} style={({ pressed }) => [
+                            <Pressable onPress={e => props.navigation.push('Home')} style={({ pressed }) => [
                                 { transform: [{ scale: pressed ? 0.94 : 1 },], borderRadius: BORDER_RADIUS, padding: moderateScale(DEFAUTL_SPACE), backgroundColor: username.length < 10 ? Colors.GREY.LIGHT : Colors.PRIMARY }, styles.button
                             ]}>
                                 <Text style={{ color: Colors.WHITE, fontFamily: 'Comfortaa-Bold', fontSize: scale(FONT_SMALL) }}>Continue</Text>

@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-export default function Home() {
+const Search = () => {
     return (
         <View style={[styles.container]}>
-            <Text>Home</Text>
+            <Text>Search</Text>
         </View>
     )
 }
@@ -20,3 +20,5 @@ const styles = StyleSheet.create({
         color: 'red'
     }
 })
+
+export default Search

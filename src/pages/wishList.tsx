@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 
-export default function Home() {
+export default function wishList() {
     return (
         <View style={[styles.container]}>
-            <Text>Home</Text>
+            <Text>wishlist</Text>
         </View>
     )
 }
