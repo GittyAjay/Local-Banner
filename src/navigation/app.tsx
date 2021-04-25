@@ -46,7 +46,6 @@ function HomeNav() {
         const label = props.label;
         const icon = props.icon;
         const focused = props.accessibilityState.selected;
-        console.log(focused);
 
         return (
             <TouchableWithoutFeedback onPress={props.onPress} style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: focused ? Colors.TIRTARY : Colors.WHITE, borderRadius: 150, marginVertical: 2, marginHorizontal: focused ? 10 : 0 }} >
