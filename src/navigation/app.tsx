@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import React, { useEffect } from 'react';
+import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Home from '../pages/Home';
 import Dashboard from '../pages/Dashboard';
@@ -8,82 +8,107 @@ import AuthDashboard from '../pages/Auth';
 import Otp from '../pages/Otp';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import wishList from '../pages/wishList';
-import { Animated, Easing, View, Text } from 'react-native';
 import AIcon from 'react-native-vector-icons/AntDesign';
+import FAIcon from 'react-native-vector-icons/FontAwesome';
+import IIcon from 'react-native-vector-icons/Ionicons';
+import EIcon from 'react-native-vector-icons/Entypo';
+import FIcon from 'react-native-vector-icons/Feather';
 import { Numericals } from '../constants/numerical';
 import { Colors } from '../constants/color';
 import Search from '../pages/Search';
 import Profile from '../pages/Profile';
+import { Pressable, StyleSheet, View } from 'react-native'
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 const { Navigator, Screen } = createStackNavigator();
 
-function HomeNav() {
-    const { ICON_SIZE, FONT_SMALL, WIDTH } = Numericals();
+function HomeNav(props: { navigation: any, route: any }) {
+    const { ICON_SIZE, FONT_SMALL, WIDTH, BORDER_RADIUS_CIRCULAR } = Numericals();
 
-    const Icons = [
-        'home',
-        'hearto',
-        'search1',
-        'user'
-    ];
-    const anim = useRef(new Animated.Value(0)).current;
-    const [state, setState] = useState(false);
-    const interpolatedBackRotate = anim.interpolate({
-        inputRange: [0, 1],
-        outputRange: [50, 0],
-    });
-
-    Animated.timing(anim, {
-        toValue: 30,
-        easing: Easing.linear,
-        duration: 1000,
-        useNativeDriver: true
-    }).start()
+    const CustomTab = ({ children, onPress }) => {
+        return (
+            <Pressable style={({ pressed }) => [{ top: 5, justifycontent: 'center', alignItem: 'center', transform: [{ scale: pressed ? 1.07 : 1 }] }, styles.shadow]} onPress={onPress} >
+                <View style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: Colors.SECONDARY }}>
+                    {children}
+                </View>
+            </Pressable >
+        )
+    }
 
     const Tab = createBottomTabNavigator();
 
-    const CustomTab = (props: any) => {
-        const label = props.label;
-        const icon = props.icon;
-        const focused = props.accessibilityState.selected;
-
-        return (
-            <TouchableWithoutFeedback onPress={props.onPress} style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', backgroundColor: focused ? Colors.TIRTARY : Colors.WHITE, borderRadius: 150, marginVertical: 2, marginHorizontal: focused ? 10 : 0 }} >
-                <AIcon name={icon} color={focused ? Colors.WHITE : Colors.TIRTARY} size={ICON_SIZE} style={{ paddingLeft: 40, paddingRight: 5 }} />
-                {focused && <Text style={{ fontFamily: "Comfortaa-Bold", color: Colors.WHITE, paddingRight: 40 }} >{label}</Text>}
-            </TouchableWithoutFeedback>
-        );
-    }
     return (
         <Tab.Navigator
             lazy={true}
+
             tabBarOptions={{
-                showLabel: false,
-                style: {
-                    height: 55,
+                labelStyle: {
+                    fontSize: FONT_SMALL,
                 },
+                activeTintColor: Colors.SECONDARY,
+                inactiveTintColor: Colors.SECONDARY,
+
+                showLabel: false,
+                style: [{
+                    height: 60,
+                    backgroundColor: Colors.WHITE,
+                    position: 'absolute',
+                    margin: 10,
+                    borderRadius: 40,
+
+                }, styles.shadow]
             }}
+
+
         >
             <Tab.Screen name="Home" component={Home}
 
                 options={{
-                    tabBarButton: (props) => <CustomTab label="Home" icon={Icons[0]} {...props} />
+                    tabBarLabel: 'HOME',
+                    tabBarIcon: ({ focused }) => (
+                        !focused ? <AIcon name="home" color={Colors.SECONDARY} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
+                            : <EIcon name="home" color={Colors.SECONDARY} size={ICON_SIZE} />
+                    ),
+
                 }}
 
             />
-            <Tab.Screen name="WishList" component={wishList}
+            <Tab.Screen name="CHAT" component={wishList}
+
                 options={{
-                    tabBarButton: (props) => <CustomTab label="WishList" icon={Icons[1]} {...props} />
+                    tabBarLabel: 'CHAT',
+
+                    tabBarIcon: ({ focused }) => (
+                        !focused ? <IIcon name="chatbubble-ellipses-outline" color={Colors.SECONDARY} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
+                            : <IIcon name="chatbubble-ellipses-sharp" color={Colors.SECONDARY} size={ICON_SIZE} />
+                    ),
+
+
                 }}
             />
-            <Tab.Screen name="Search" component={Search}
+            <Tab.Screen name="SELL" component={Search}
+
                 options={{
-                    tabBarButton: (props) => <CustomTab label="Search" icon={Icons[2]} {...props} />
+                    tabBarLabel: 'SELL',
+                    tabBarIcon: ({ focused }) => (<AIcon name="plus" color={focused ? Colors.WHITE : Colors.GREY.LIGHT} size={ICON_SIZE} />),
+                    tabBarButton: (props) => <CustomTab  {...props} />,
                 }}
             />
-            <Tab.Screen name="Profile" component={Profile}
+            <Tab.Screen name="MY ADDS" component={Profile}
                 options={{
-                    tabBarButton: (props) => <CustomTab label="Profile" icon={Icons[3]} {...props} />
+                    tabBarLabel: 'MY ADDS',
+                    tabBarIcon: ({ focused }) => (
+                        !focused ? <AIcon name="hearto" color={Colors.SECONDARY} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
+                            : <AIcon name="heart" color={Colors.SECONDARY} size={ICON_SIZE} />
+                    ),
+                }}
+            />
+            <Tab.Screen name="ACCOUNT" component={Profile}
+                options={{
+                    tabBarLabel: 'ACCOUNT',
+                    tabBarIcon: ({ focused }) => (
+                        !focused ? <FAIcon name="user-o" color={Colors.SECONDARY} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
+                            : <FAIcon name="user" color={Colors.SECONDARY} size={ICON_SIZE} />
+                    ),
                 }}
             />
         </Tab.Navigator>
@@ -105,3 +130,14 @@ export const AppNavigator = () => (
         <HomeNavigator />
     </NavigationContainer>
 );
+const styles = StyleSheet.create({
+    shadow: {
+        shadowColor: Colors.GREY.SIMPLE,
+        shadowOffset: {
+            width: 0, height: 10
+        },
+        shadowOpacity: 0.6,
+        shadowRadius: 3.5,
+        elevation: 10,
+    }
+})
