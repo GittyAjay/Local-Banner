@@ -43,8 +43,8 @@ const Slider = () => {
         return (
             <LinearGradient
                 start={{ x: 0.1, y: 0 }}
-                end={{ x: 0, y: 0.5 }}
-                colors={['#FA26A0', Colors.PRIMARY]}
+                end={{ x: 0, y: 0.9 }}
+                colors={[Colors.SECONDARY, Colors.PRIMARY]}
                 style={[styles.linearGradient, { borderRadius: BORDER_RADIUS, padding: 2 * DEFAUTL_SPACE }]}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-evenly', alignItems: 'stretch', borderRadius: BORDER_RADIUS }}>
                     <View style={{ flex: 0.5, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>

@@ -68,7 +68,7 @@ export default function Dashboard(props: { navigation: { push: Function } }) {
             <StatusBar color={Colors.PRIMARY} />
             <Animated.View style={[styles.FONT_ELARGE_animation_desc_container, { height: verticalScale(HEIGHT * 6 / 10), width: scale(WIDTH) }]}>
                 <View style={{ marginVertical: DEFAUTL_SPACE }}>
-                    <Text style={[styles.FONT_ELARGE, { fontSize: scale(FONT_LARGE), color: Colors.WHITE, marginTop: DEFAUTL_SPACE }]}>Okfind</Text>
+                    <Text style={[styles.FONT_ELARGE, { fontSize: scale(FONT_LARGE), color: Colors.WHITE, marginTop: DEFAUTL_SPACE }]}>firstfinder</Text>
                 </View>
                 <View style={{ height: moderateScale(280) }}>
                     <Carousel
@@ -102,7 +102,7 @@ export default function Dashboard(props: { navigation: { push: Function } }) {
                         <Text style={{ color: Colors.PRIMARY, fontFamily: 'Montserrat-Bold', fontSize: scale(FONT_SMALL) }}>Get Started</Text>
                     </Pressable>
                     <Pressable style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.9 : 1 }], backgroundColor: pressed ? Colors.GREY.SIMPLE : Colors.PRIMARY, borderRadius: BORDER_RADIUS_CIRCULAR, borderColor: Colors.WHITE, borderWidth: 2, borderStyle: 'solid', height: verticalScale(BUTTON_HEIGHT) }, styles.button]}>
-                        <Text style={{ color: Colors.WHITE, fontFamily: 'Montserrat-Bold', fontSize: scale(FONT_SMALL) }}>I Already Have a Okfind Account</Text>
+                        <Text style={{ color: Colors.WHITE, fontFamily: 'Montserrat-Bold', fontSize: scale(FONT_SMALL) }}>I Already Have a firstfinder Account</Text>
                     </Pressable>
                 </View>
             </View>

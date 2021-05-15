@@ -27,7 +27,7 @@ function HomeNav(props: { navigation: any, route: any }) {
     const CustomTab = ({ children, onPress }) => {
         return (
             <Pressable style={({ pressed }) => [{ top: 5, justifycontent: 'center', alignItem: 'center', transform: [{ scale: pressed ? 1.07 : 1 }] }, styles.shadow]} onPress={onPress} >
-                <View style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: Colors.SECONDARY }}>
+                <View style={{ width: 50, height: 50, borderRadius: 25, backgroundColor: Colors.QUARTZ }}>
                     {children}
                 </View>
             </Pressable >
@@ -44,8 +44,8 @@ function HomeNav(props: { navigation: any, route: any }) {
                 labelStyle: {
                     fontSize: FONT_SMALL,
                 },
-                activeTintColor: Colors.SECONDARY,
-                inactiveTintColor: Colors.SECONDARY,
+                activeTintColor: Colors.QUARTZ,
+                inactiveTintColor: Colors.QUARTZ,
 
                 showLabel: false,
                 style: [{
@@ -65,8 +65,8 @@ function HomeNav(props: { navigation: any, route: any }) {
                 options={{
                     tabBarLabel: 'HOME',
                     tabBarIcon: ({ focused }) => (
-                        !focused ? <AIcon name="home" color={Colors.SECONDARY} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
-                            : <EIcon name="home" color={Colors.SECONDARY} size={ICON_SIZE} />
+                        !focused ? <AIcon name="home" color={Colors.QUARTZ} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
+                            : <EIcon name="home" color={Colors.QUARTZ} size={ICON_SIZE} />
                     ),
 
                 }}
@@ -78,8 +78,8 @@ function HomeNav(props: { navigation: any, route: any }) {
                     tabBarLabel: 'CHAT',
 
                     tabBarIcon: ({ focused }) => (
-                        !focused ? <IIcon name="chatbubble-ellipses-outline" color={Colors.SECONDARY} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
-                            : <IIcon name="chatbubble-ellipses-sharp" color={Colors.SECONDARY} size={ICON_SIZE} />
+                        !focused ? <IIcon name="chatbubble-ellipses-outline" color={Colors.QUARTZ} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
+                            : <IIcon name="chatbubble-ellipses-sharp" color={Colors.QUARTZ} size={ICON_SIZE} />
                     ),
 
 
@@ -97,8 +97,8 @@ function HomeNav(props: { navigation: any, route: any }) {
                 options={{
                     tabBarLabel: 'MY ADDS',
                     tabBarIcon: ({ focused }) => (
-                        !focused ? <AIcon name="hearto" color={Colors.SECONDARY} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
-                            : <AIcon name="heart" color={Colors.SECONDARY} size={ICON_SIZE} />
+                        !focused ? <AIcon name="hearto" color={Colors.QUARTZ} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
+                            : <AIcon name="heart" color={Colors.QUARTZ} size={ICON_SIZE} />
                     ),
                 }}
             />
@@ -106,8 +106,8 @@ function HomeNav(props: { navigation: any, route: any }) {
                 options={{
                     tabBarLabel: 'ACCOUNT',
                     tabBarIcon: ({ focused }) => (
-                        !focused ? <FAIcon name="user-o" color={Colors.SECONDARY} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
-                            : <FAIcon name="user" color={Colors.SECONDARY} size={ICON_SIZE} />
+                        !focused ? <FAIcon name="user-o" color={Colors.QUARTZ} size={ICON_SIZE} style={{ opacity: focused ? 1 : 0.8 }} />
+                            : <FAIcon name="user" color={Colors.QUARTZ} size={ICON_SIZE} />
                     ),
                 }}
             />

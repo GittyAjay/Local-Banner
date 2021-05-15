@@ -21,7 +21,7 @@ export function Numericals() {
         ANIM_HEIGHT: 250,
         BORDER_WIDTH: 1,
         BORDER_RADIUS: 10,
-        BORDER_RADIUS_CIRCULAR: 30
+        BORDER_RADIUS_CIRCULAR: 200
     }
 }
 

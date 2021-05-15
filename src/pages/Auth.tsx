@@ -31,7 +31,7 @@ export default function Auth(props: { navigation: { push: Function } }) {
                             </TouchableOpacity>
                         </View>
                         <View style={[styles.heading, { marginVertical: moderateScale(moderateScale(DEFAUTL_SPACE)) }]}>
-                            <Text style={[styles.heading_txt, { fontSize: scale(FONT_LARGE) }]}>Log in or sign up to Fru</Text>
+                            <Text style={[styles.heading_txt, { fontSize: scale(FONT_LARGE) }]}>Log in or sign up to firstfinder</Text>
                         </View>
                         <View style={[{ flex: 1, flexDirection: 'column', alignItems: 'flex-start' }]}>
                             <View style={[styles.topCorner_input_box, {
