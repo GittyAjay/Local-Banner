@@ -11,6 +11,8 @@ export const Colors = {
     TIRTARY: '#36EEE0',
     QUARTZ: '#BCECE0',
     YELLOW: '#F8EA8C',
-    CYAN: '#4CD7D0'
+    CYAN: '#4CD7D0',
+    ROSE_WATER: '#E8B4B8',
+    MINT: '#B4F8C8'
 
 }
