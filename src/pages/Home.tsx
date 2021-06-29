@@ -14,35 +14,22 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Slider from '../components/HomeSlider';
 import ProductCard from '../components/ProductCard'
 import firestore from '@react-native-firebase/firestore';
-import { connect, useDispatch } from 'react-redux'
+import { connect, useDispatch, useSelector } from 'react-redux'
 
 function Home(props) {
     const { WIDTH, HEIGHT, FONT_ELARGE, ICON_SIZE, DEFAUTL_SPACE, FONT_GLARGE, FONT_MID, BORDER_RADIUS_CIRCULAR } = Numericals();
     const projectDispathcher = useDispatch();
     useEffect(() => {
         firestore().collection('Advertisments').onSnapshot((result) => {
-            let count = 0;
             projectDispathcher({ type: 'CLEAR_DEFAULT' })
             result.docs.map(documentSnapshot => {
-                count++;
                 let obj = documentSnapshot.data();
                 projectDispathcher({ type: 'ADVERTISMENTS', payload: obj })
-                projectDispathcher({ type: 'ADVERTISMENTS_COUNT', payload: count })
+                console.log(obj._type)
             })
         }, (error) => {
             console.log(error);
         });
-
-        firestore()
-            .collection('Advertisments')
-            .get()
-            .then(querySnapshot => {
-                querySnapshot.forEach(documentSnapshot => {
-                    let obj = documentSnapshot.data();
-                    projectDispathcher({ type: 'ADVERTISMENTS', payload: obj })
-                    projectDispathcher({ type: 'ADVERTISMENTS_COUNT', payload: querySnapshot.size })
-                });
-            });
     }, [])
 
     return (

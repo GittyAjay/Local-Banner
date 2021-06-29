@@ -6,10 +6,19 @@ import AIcon from 'react-native-vector-icons/AntDesign';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import FIcon from 'react-native-vector-icons/Fontisto';
 import EIcon from 'react-native-vector-icons/Entypo';
-import { connect } from 'react-redux'
+import { connect, useSelector } from 'react-redux'
 const AddsByCategories = (props) => {
     const { ICON_SIZE, DEFAUTL_SPACE, FONT_LARGE, FONT_SMALL, FONT_MID, BORDER_WIDTH, BORDER_RADIUS, INLINE_GAP, HEIGHT } = Numericals();
-    console.log(props.route.params.type);
+    const [count, setCount] = useState(0);
+    useEffect(() => {
+        setCount(0);
+        props.advertisments.map(value => {
+            if (value._type == props.route.params.type) {
+                setCount(prev => prev + 1);
+            }
+        })
+    }, [])
+
     return (
         <>
             <View style={[styles.search, { paddingHorizontal: DEFAUTL_SPACE, paddingVertical: DEFAUTL_SPACE }]}>
@@ -30,25 +39,25 @@ const AddsByCategories = (props) => {
             </View>
             <View style={[styles.container]}>
                 <View style={{ paddingVertical: INLINE_GAP, borderWidth: BORDER_WIDTH, borderColor: Colors.HOME_BCK, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                    <Text style={{ fontSize: FONT_LARGE, fontWeight: 'bold', paddingRight: DEFAUTL_SPACE / 2 }}>{props.count}</Text>
+                    <Text style={{ fontSize: FONT_LARGE, fontWeight: 'bold', paddingRight: DEFAUTL_SPACE / 2 }}>{count}</Text>
                     <Text style={{ fontSize: FONT_LARGE }}>Ads found</Text>
                 </View>
                 <ScrollView style={{ flexDirection: 'column', maxHeight: HEIGHT }}>
                     {props.advertisments && props.advertisments.map((val, key) => {
-                        return (
-                            <View key={key} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'stretch', borderWidth: BORDER_WIDTH, borderColor: Colors.HOME_BCK, paddingVertical: 2 }}>
-                                <Image source={{ uri: val.url[0].url }} resizeMode='stretch' style={{ width: 190, height: 150 }} />
+                        if (val._type == props.route.params.type)
+                            return (
+                                <View key={key} style={{ flexDirection: 'row', justifyContent: 'center', alignItems: 'stretch', borderWidth: BORDER_WIDTH, borderColor: Colors.HOME_BCK, paddingVertical: 2 }}>
+                                    <Image source={{ uri: val.url[0].url }} resizeMode='stretch' style={{ width: 190, height: 150 }} />
 
-                                <View style={{ flexDirection: 'column', paddingLeft: INLINE_GAP, justifyContent: 'space-between', alignItems: 'stretch' }}>
-                                    <View>
-                                        <Text style={{ fontWeight: 'bold', fontSize: FONT_MID }}>{`\u20B9`} {val.Price}</Text>
-                                        <Text>{val.Title}</Text>
+                                    <View style={{ flexDirection: 'column', paddingLeft: INLINE_GAP, justifyContent: 'space-between', alignItems: 'stretch' }}>
+                                        <View>
+                                            <Text style={{ fontWeight: 'bold', fontSize: FONT_MID }}>{`\u20B9`} {val.Price}</Text>
+                                            <Text>{val.Title}</Text>
+                                        </View>
+                                        <Text>{val.Location}</Text>
                                     </View>
-                                    <Text>address</Text>
                                 </View>
-
-                            </View>
-                        )
+                            )
                     })}
                 </ScrollView>
             </View>
@@ -56,10 +65,9 @@ const AddsByCategories = (props) => {
     )
 }
 const mapStateToProps = (props) => {
-    // console.log("projects", props.project);
+    // console.log(props);
     return {
         advertisments: props.project.advertisments,
-        count: props.project.count
     }
 }
 

@@ -21,6 +21,7 @@ import Search from '../pages/Search';
 import Profile from '../pages/Profile';
 import ProductImg from '../pages/ProductImage';
 import FinalPage from '../pages/FinalPage';
+import ShowAds from '../pages/ShowAds';
 import AddsByCategories from '../pages/AddsByCategories';
 import { Pressable, StyleSheet, View } from 'react-native'
 import auth from '@react-native-firebase/auth';
@@ -137,6 +138,7 @@ const HomeNavigator = () => {
             <Screen name='ProductImg' component={ProductImg} />
             <Screen name='FinalPage' component={FinalPage} />
             <Screen name='AddsByCategories' component={AddsByCategories} />
+            <Screen name='ShowAds' component={ShowAds} />
         </Navigator>
         : <Navigator headerMode='none'>
             <Screen name='Splash' component={Splash} />
@@ -149,6 +151,7 @@ const HomeNavigator = () => {
             <Screen name='ProductImg' component={ProductImg} />
             <Screen name='FinalPage' component={FinalPage} />
             <Screen name='AddsByCategories' component={AddsByCategories} />
+            <Screen name='ShowAds' component={ShowAds} />
         </Navigator>
 }
 

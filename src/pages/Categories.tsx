@@ -39,16 +39,16 @@ const Categories = (props) => {
             <View style={[styles.container, { backgroundColor: Colors.WHITE }]}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
                     <TouchableOpacity style={[styles.box, { borderWidth: BORDER_WIDTH_SMALL, borderColor: Colors.HOME_BCK }]} onPress={res => {
-                        onCategorySelected('cars')
+                        onCategorySelected('tolets')
                     }}>
-                        <AIcon name="car" size={ICON_SIZE} />
-                        <Text>Cars</Text>
+                        <MIcon name="house-siding" size={ICON_SIZE} />
+                        <Text>Tolets</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.box, { borderWidth: BORDER_WIDTH_SMALL, borderColor: Colors.HOME_BCK }]} onPress={res => {
-                        onCategorySelected('properties')
+                        onCategorySelected('chef')
                     }}>
-                        <FAIcon name="building-o" size={ICON_SIZE} />
-                        <Text>Properties</Text>
+                        <MCIcon name="chef-hat" size={ICON_SIZE} />
+                        <Text>Chef</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -73,10 +73,10 @@ const Categories = (props) => {
                         <Text>Bikes</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.box, { borderWidth: BORDER_WIDTH_SMALL, borderColor: Colors.HOME_BCK }]} onPress={res => {
-                        onCategorySelected('electronics')
+                        onCategorySelected('furniture')
                     }}>
-                        <AIcon name="printer" size={ICON_SIZE} />
-                        <Text>Electronics & Appliances</Text>
+                        <MCIcon name="table-furniture" size={ICON_SIZE} />
+                        <Text>Furniture</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
