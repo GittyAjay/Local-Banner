@@ -73,7 +73,7 @@ const ShowAds = (props) => {
                     <IOIcon name="chatbubble-outline" size={ICON_SIZE} color={Colors.WHITE} />
                     <Text style={{ color: Colors.WHITE, fontSize: FONT_MID, fontWeight: '900', paddingLeft: DEFAUTL_SPACE }}>Chat</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={{ flex: 0.49, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingVertical: BUTTON_PADDING, backgroundColor: Colors.BLACK, borderRadius: BORDER_RADIUS }} onPress={res => props.navigation.navigate('Home')}>
+                <TouchableOpacity style={{ flex: 0.49, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', paddingVertical: BUTTON_PADDING, backgroundColor: Colors.BLACK, borderRadius: BORDER_RADIUS }}>
                     <MCIcon name="offer" size={ICON_SIZE} color={Colors.WHITE} />
                     <Text style={{ color: Colors.WHITE, fontSize: FONT_MID, fontWeight: '900', paddingLeft: DEFAUTL_SPACE }}>Make Offer</Text>
                 </TouchableOpacity>
