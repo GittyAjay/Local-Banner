@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, Text, StyleSheet, TextInput, SafeAreaView } from 'react-native'
 import { Numericals } from '../constants/numerical';
 import { Colors } from '../constants/color';
@@ -13,11 +13,37 @@ import SLIcon from 'react-native-vector-icons/SimpleLineIcons';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Slider from '../components/HomeSlider';
 import ProductCard from '../components/ProductCard'
+import firestore from '@react-native-firebase/firestore';
+import { connect, useDispatch } from 'react-redux'
 
-export default function Home() {
+function Home(props) {
     const { WIDTH, HEIGHT, FONT_ELARGE, ICON_SIZE, DEFAUTL_SPACE, FONT_GLARGE, FONT_MID, BORDER_RADIUS_CIRCULAR } = Numericals();
+    const projectDispathcher = useDispatch();
+    useEffect(() => {
+        firestore().collection('Advertisments').onSnapshot((result) => {
+            let count = 0;
+            projectDispathcher({ type: 'CLEAR_DEFAULT' })
+            result.docs.map(documentSnapshot => {
+                count++;
+                let obj = documentSnapshot.data();
+                projectDispathcher({ type: 'ADVERTISMENTS', payload: obj })
+                projectDispathcher({ type: 'ADVERTISMENTS_COUNT', payload: count })
+            })
+        }, (error) => {
+            console.log(error);
+        });
 
-    console.log(HEIGHT);
+        firestore()
+            .collection('Advertisments')
+            .get()
+            .then(querySnapshot => {
+                querySnapshot.forEach(documentSnapshot => {
+                    let obj = documentSnapshot.data();
+                    projectDispathcher({ type: 'ADVERTISMENTS', payload: obj })
+                    projectDispathcher({ type: 'ADVERTISMENTS_COUNT', payload: querySnapshot.size })
+                });
+            });
+    }, [])
 
     return (
         <>
@@ -52,63 +78,62 @@ export default function Home() {
                         </View>
                         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: DEFAUTL_SPACE }}>
-                                <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }}>
+                                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }} onPress={res => props.navigation.navigate('AddsByCategories', { type: 'nearbyAds' })}>
                                     <View style={{ padding: DEFAUTL_SPACE, backgroundColor: Colors.CYAN, borderRadius: BORDER_RADIUS_CIRCULAR, marginBottom: DEFAUTL_SPACE }}>
                                         <EIcon name="direction" size={ICON_SIZE + 5} color={Colors.BLACK} />
                                     </View>
                                     <Text>NEARBY ADS</Text>
-                                </View>
+                                </TouchableOpacity>
 
-                                <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }}>
+                                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }} onPress={res => props.navigation.navigate('AddsByCategories', { type: 'tolets' })}>
                                     <View style={{ padding: DEFAUTL_SPACE, backgroundColor: Colors.YELLOW, borderRadius: BORDER_RADIUS_CIRCULAR, marginBottom: DEFAUTL_SPACE }}>
                                         <MCIcon name="home-modern" size={ICON_SIZE + 5} color={Colors.BLACK} />
                                     </View>
                                     <Text>TOLETS</Text>
-                                </View>
-                                <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }}>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }} onPress={res => props.navigation.navigate('AddsByCategories', { type: 'chef' })}>
                                     <View style={{ padding: DEFAUTL_SPACE, backgroundColor: Colors.ROSE_WATER, borderRadius: BORDER_RADIUS_CIRCULAR, marginBottom: DEFAUTL_SPACE }}>
                                         <MCIcon name="chef-hat" size={ICON_SIZE + 5} color={Colors.BLACK} />
                                     </View>
                                     <Text>CHEF</Text>
-                                </View>
-                                <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }}>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }} onPress={res => props.navigation.navigate('AddsByCategories', { type: 'furniture' })}>
                                     <View style={{ padding: DEFAUTL_SPACE, backgroundColor: Colors.MINT, borderRadius: BORDER_RADIUS_CIRCULAR, marginBottom: DEFAUTL_SPACE }}>
                                         <MCIcon name="table-furniture" size={ICON_SIZE + 5} color={Colors.BLACK} />
                                     </View>
                                     <Text>FURNITURE</Text>
-                                </View>
+                                </TouchableOpacity>
 
-                                <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }}>
+                                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }} onPress={res => props.navigation.navigate('AddsByCategories', { type: 'stationary' })}>
                                     <View style={{ padding: DEFAUTL_SPACE, backgroundColor: Colors.CYAN, borderRadius: BORDER_RADIUS_CIRCULAR, marginBottom: DEFAUTL_SPACE }}>
                                         <SLIcon name="notebook" size={ICON_SIZE + 5} color={Colors.BLACK} />
                                     </View>
                                     <Text>STATIONARY</Text>
-                                </View>
+                                </TouchableOpacity>
 
-                                <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }}>
+                                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }} onPress={res => props.navigation.navigate('AddsByCategories', { type: 'chef' })}>
                                     <View style={{ padding: DEFAUTL_SPACE, backgroundColor: Colors.CYAN, borderRadius: BORDER_RADIUS_CIRCULAR, marginBottom: DEFAUTL_SPACE }}>
                                         <MCIcon name="chef-hat" size={ICON_SIZE + 5} color={Colors.BLACK} />
                                     </View>
                                     <Text>CHEF</Text>
-                                </View>
-                                <View style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }}>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={{ flexDirection: 'column', justifyContent: 'center', alignItems: 'center', marginRight: 3 * DEFAUTL_SPACE }} onPress={res => props.navigation.navigate('AddsByCategories', { type: 'chef' })}>
                                     <View style={{ padding: DEFAUTL_SPACE, backgroundColor: Colors.CYAN, borderRadius: BORDER_RADIUS_CIRCULAR, marginBottom: DEFAUTL_SPACE }}>
                                         <MCIcon name="chef-hat" size={ICON_SIZE + 5} color={Colors.BLACK} />
                                     </View>
                                     <Text>CHEF</Text>
-                                </View>
+                                </TouchableOpacity>
 
                             </View>
                         </ScrollView>
 
                     </View>
 
-
-                    <View style={{ marginVertical: DEFAUTL_SPACE - 3, backgroundColor: Colors.WHITE, paddingVertical: DEFAUTL_SPACE, paddingBottom: 60 }}>
-                        <ScrollView style={[{ flex: 1 }, styles.shadow]}>
-                            <Text style={{ fontSize: FONT_MID, marginHorizontal: DEFAUTL_SPACE }}>Fresh Recommendations</Text>
-                            <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between' }}>
-                                <ProductCard />
+                    <View style={{ marginVertical: DEFAUTL_SPACE - 3, backgroundColor: Colors.WHITE, paddingVertical: DEFAUTL_SPACE }}>
+                        <ScrollView style={[{ marginBottom: 100 }]}>
+                            <Text style={{ fontSize: FONT_MID, marginHorizontal: DEFAUTL_SPACE, marginVertical: DEFAUTL_SPACE }}>Fresh Recommendations</Text>
+                            <View style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'flex-start', marginHorizontal: DEFAUTL_SPACE / 2 }}>
+                                {props.advertisments && props.advertisments.map((value, key) => <ProductCard key={key} ads={value} />)}
                             </View>
                         </ScrollView>
                     </View>
@@ -118,6 +143,11 @@ export default function Home() {
         </>
     )
 }
+const mapStateToProps = (props) => {
+    // console.log("projects", props.project);
+    return { advertisments: props.project.advertisments }
+}
+export default connect(mapStateToProps)(Home);
 const styles = StyleSheet.create({
     container: {
         flex: 1,

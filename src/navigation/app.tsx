@@ -6,6 +6,8 @@ import Dashboard from '../pages/Dashboard';
 import Splash from '../pages/Splash';
 import AuthDashboard from '../pages/Auth';
 import Otp from '../pages/Otp';
+import Categories from '../pages/Categories';
+import SelectedCategories from '../pages/SelectedCategories';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import wishList from '../pages/wishList';
 import AIcon from 'react-native-vector-icons/AntDesign';
@@ -17,7 +19,12 @@ import { Numericals } from '../constants/numerical';
 import { Colors } from '../constants/color';
 import Search from '../pages/Search';
 import Profile from '../pages/Profile';
+import ProductImg from '../pages/ProductImage';
+import FinalPage from '../pages/FinalPage';
+import AddsByCategories from '../pages/AddsByCategories';
 import { Pressable, StyleSheet, View } from 'react-native'
+import auth from '@react-native-firebase/auth';
+import { useDispatch, useSelector, connect } from 'react-redux'
 import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 const { Navigator, Screen } = createStackNavigator();
 
@@ -85,7 +92,7 @@ function HomeNav(props: { navigation: any, route: any }) {
 
                 }}
             />
-            <Tab.Screen name="SELL" component={Search}
+            <Tab.Screen name="SELL" component={Categories}
 
                 options={{
                     tabBarLabel: 'SELL',
@@ -115,15 +122,35 @@ function HomeNav(props: { navigation: any, route: any }) {
     );
 }
 // headerMode='none'
-const HomeNavigator = () => (
-    <Navigator headerMode='none'>
-        <Screen name='Splash' component={Splash} />
-        <Screen name='Dashboard' component={Dashboard} />
-        <Screen name='Auth' component={AuthDashboard} />
-        <Screen name='Otp' component={Otp} />
-        <Screen name='Home' component={HomeNav} />
-    </Navigator>
-);
+const HomeNavigator = () => {
+    let currentUser = auth().currentUser;
+    console.log(currentUser);
+    const signInDispatch = useDispatch();
+    const signOutDispatch = useDispatch();
+    currentUser != null ? signInDispatch({ type: 'SIGN_IN' }) : signOutDispatch({ type: 'SIGN_OUT' });
+    const isSignIn = useSelector(state => state.auth.isSignin);
+    return isSignIn ?
+        <Navigator headerMode='none'>
+            <Screen name='HomeScreen' component={HomeNav} />
+            <Screen name='Categories' component={Categories} />
+            <Screen name='SelectedCategories' component={SelectedCategories} />
+            <Screen name='ProductImg' component={ProductImg} />
+            <Screen name='FinalPage' component={FinalPage} />
+            <Screen name='AddsByCategories' component={AddsByCategories} />
+        </Navigator>
+        : <Navigator headerMode='none'>
+            <Screen name='Splash' component={Splash} />
+            <Screen name='Dashboard' component={Dashboard} />
+            <Screen name='Auth' component={AuthDashboard} />
+            <Screen name='Otp' component={Otp} />
+            <Screen name='HomeScreen' component={HomeNav} />
+            <Screen name='Categories' component={Categories} />
+            <Screen name='SelectedCategories' component={SelectedCategories} />
+            <Screen name='ProductImg' component={ProductImg} />
+            <Screen name='FinalPage' component={FinalPage} />
+            <Screen name='AddsByCategories' component={AddsByCategories} />
+        </Navigator>
+}
 
 export const AppNavigator = () => (
     <NavigationContainer>

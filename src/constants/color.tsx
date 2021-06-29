@@ -13,6 +13,8 @@ export const Colors = {
     YELLOW: '#F8EA8C',
     CYAN: '#4CD7D0',
     ROSE_WATER: '#E8B4B8',
-    MINT: '#B4F8C8'
+    MINT: '#B4F8C8',
+    HOME_BCK: '#EBECF0',
+    GREEN_SHADE: '#00A49E'
 
 }

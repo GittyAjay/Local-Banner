@@ -14,13 +14,16 @@ export function Numericals() {
         FONT_LARGE: 23,
         FONT_MID: 18,
         FONT_SMALL: 13,
+        FONT_XSMALL: 12,
         BUTTON_HEIGHT: 50,
         DEFAUTL_SPACE: 10,
         ICON_SIZE: 23,
         ANIM_WIDTH: 300,
         ANIM_HEIGHT: 250,
         BORDER_WIDTH: 1,
+        BORDER_WIDTH_SMALL: 0.7,
         BORDER_RADIUS: 10,
+        BUTTON_PADDING: 15,
         BORDER_RADIUS_CIRCULAR: 200
     }
 }

@@ -9,6 +9,8 @@ import { View, Text, StyleSheet, Pressable } from 'react-native'
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
 import Carousel from 'react-native-snap-carousel';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Logo } from '../constants/appLogo';
+import { AppName } from '../constants/appName';
 export default function Dashboard(props: { navigation: { push: Function } }) {
 
     const { BUTTON_HEIGHT, DEFAUTL_SPACE, FONT_SMALL, FONT_LARGE, FONT_MID, HEIGHT, WIDTH, BORDER_RADIUS_CIRCULAR, INLINE_GAP } = Numericals();
@@ -68,7 +70,7 @@ export default function Dashboard(props: { navigation: { push: Function } }) {
             <StatusBar color={Colors.PRIMARY} />
             <Animated.View style={[styles.FONT_ELARGE_animation_desc_container, { height: verticalScale(HEIGHT * 6 / 10), width: scale(WIDTH) }]}>
                 <View style={{ marginVertical: DEFAUTL_SPACE }}>
-                    <Text style={[styles.FONT_ELARGE, { fontSize: scale(FONT_LARGE), color: Colors.WHITE, marginTop: DEFAUTL_SPACE }]}>firstfinder</Text>
+                    <Logo />
                 </View>
                 <View style={{ height: moderateScale(280) }}>
                     <Carousel
@@ -102,7 +104,7 @@ export default function Dashboard(props: { navigation: { push: Function } }) {
                         <Text style={{ color: Colors.PRIMARY, fontFamily: 'Montserrat-Bold', fontSize: scale(FONT_SMALL) }}>Get Started</Text>
                     </Pressable>
                     <Pressable style={({ pressed }) => [{ transform: [{ scale: pressed ? 0.9 : 1 }], backgroundColor: pressed ? Colors.GREY.SIMPLE : Colors.PRIMARY, borderRadius: BORDER_RADIUS_CIRCULAR, borderColor: Colors.WHITE, borderWidth: 2, borderStyle: 'solid', height: verticalScale(BUTTON_HEIGHT) }, styles.button]}>
-                        <Text style={{ color: Colors.WHITE, fontFamily: 'Montserrat-Bold', fontSize: scale(FONT_SMALL) }}>I Already Have a firstfinder Account</Text>
+                        <Text style={{ color: Colors.WHITE, fontFamily: 'Montserrat-Bold', fontSize: scale(FONT_SMALL) }}>I Already Have a {AppName} Account</Text>
                     </Pressable>
                 </View>
             </View>

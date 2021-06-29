@@ -5,19 +5,15 @@ import { Colors } from '../constants/color';
 import { Numericals } from '../constants/numerical';
 import StatusBar from '../styles/statusBar';
 import FIcon from 'react-native-vector-icons/Feather'
+import MIcon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { Logo } from '../constants/appLogo';
 export default function Splash(props: { navigation: { push: Function } }) {
-    const { FONT_ELARGE, WIDTH, ICON_SIZE } = Numericals();
-
     setTimeout(() => {
         props.navigation.push('Dashboard')
     }, 2000);
-
     return (
-        <View style={[styles.container]}>
-            <StatusBar color={Colors.PRIMARY} />
-            <Text style={[styles.Text_style, { fontSize: FONT_ELARGE }]}>First</Text>
-            <FIcon name="search" color={Colors.WHITE} size={ICON_SIZE} />
-            <Text style={[styles.Text_style, { fontSize: FONT_ELARGE }]}>inder</Text>
+        <View style={styles.container}>
+            <Logo />
         </View>
     )
 }
@@ -29,8 +25,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: Colors.PRIMARY
     },
-    Text_style: {
-        fontFamily: "Montserrat-Bold",
-        color: Colors.WHITE,
-    }
 })

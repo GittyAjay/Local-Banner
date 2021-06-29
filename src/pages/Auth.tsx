@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { View, Text, StyleSheet, Button, Pressable, ScrollView, Platform, StatusBar } from 'react-native'
+import { View, Text, StyleSheet, Button, Pressable, ScrollView, Platform, StatusBar, Alert } from 'react-native'
 import { Colors } from '../constants/color';
 import { Numericals } from '../constants/numerical';
 import StatusBarTemplate from '../styles/statusBar';
@@ -9,29 +9,48 @@ import FIcon from 'react-native-vector-icons/Fontisto';
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FAIcon from 'react-native-vector-icons/FontAwesome5';
 import CountryCode from '../components/CountryCode';
+import { AppName } from '../constants/appName';
 import { scale, verticalScale, moderateScale } from 'react-native-size-matters';
+import auth from '@react-native-firebase/auth';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function Auth(props: { navigation: { push: Function } }) {
     const { ICON_SIZE, DEFAUTL_SPACE, FONT_LARGE, FONT_SMALL, BORDER_WIDTH, BORDER_RADIUS, INLINE_GAP } = Numericals();
-    const [username, setUserName] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
     const [placeholder, setPlaceholder] = useState('Phone number');
     const [sizeChanger, setsizeChanger] = useState(0);
     const [maxPhoneNumber, setMaxPhoneNumber] = useState(10);
     const [countryCode, setCountryCode] = useState(0);
+    const [lodingStart, setLodingStart] = useState(false);
+    const [spinner, setSpinner] = useState(false);
+
+    async function signInWithPhoneNumber() {
+        setLodingStart(true);
+        await auth().signInWithPhoneNumber('+91' + phoneNumber).then(res => {
+            setLodingStart(false);
+            console.log(res);
+            props.navigation.navigate('HomeScreen');
+        }).catch(error => { Alert.alert(error); setLodingStart(false); });
+    }
 
     return (
         <>
+            <Spinner
+                visible={lodingStart}
+                textContent={'Authenticating...'}
+                textStyle={styles.spinnerTextStyle}
+            />
             <ScrollView style={{ backgroundColor: Colors.WHITE }}>
                 <View style={[styles.container, { backgroundColor: Colors.WHITE, paddingHorizontal: moderateScale(INLINE_GAP) }]}>
                     <StatusBarTemplate color={Colors.WHITE} />
                     <View style={{ flex: 1, flexDirection: 'column', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                         <View style={[styles.closeButton]}>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={res => props.navigation.pop()}>
                                 <AIcon name="close" color={Colors.BLACK} size={moderateScale(moderateScale(ICON_SIZE))} />
                             </TouchableOpacity>
                         </View>
                         <View style={[styles.heading, { marginVertical: moderateScale(moderateScale(DEFAUTL_SPACE)) }]}>
-                            <Text style={[styles.heading_txt, { fontSize: scale(FONT_LARGE) }]}>Log in or sign up to firstfinder</Text>
+                            <Text style={[styles.heading_txt, { fontSize: scale(FONT_LARGE) }]}>Log in or sign up to {AppName}</Text>
                         </View>
                         <View style={[{ flex: 1, flexDirection: 'column', alignItems: 'flex-start' }]}>
                             <View style={[styles.topCorner_input_box, {
@@ -59,7 +78,7 @@ export default function Auth(props: { navigation: { push: Function } }) {
                                 </View>
                             </View>
                             <View style={[styles.buttomCorner_input_box, {
-                                borderColor: username.length < 10 && username.length > 0 ? Colors.RED : Colors.GREY.LIGHT,
+                                borderColor: phoneNumber.length < 10 && phoneNumber.length > 0 ? Colors.RED : Colors.GREY.LIGHT,
                                 paddingLeft: moderateScale(DEFAUTL_SPACE),
                                 borderWidth: BORDER_WIDTH,
                                 borderTopLeftRadius: sizeChanger * BORDER_RADIUS,
@@ -72,15 +91,15 @@ export default function Auth(props: { navigation: { push: Function } }) {
                                     <TextInput
                                         onFocus={e => { setsizeChanger(1); setPlaceholder(''); }}
                                         onBlur={e => { setsizeChanger(0); setPlaceholder('Phone number'); }}
-                                        onChangeText={user => { setUserName(user); }}
-                                        defaultValue={username}
+                                        onChangeText={user => { setPhoneNumber(user); }}
+                                        defaultValue={phoneNumber}
                                         maxLength={maxPhoneNumber}
-                                        style={{ fontSize: scale(FONT_SMALL), fontFamily: 'Comfortaa-Bold' }}
+                                        style={{ fontSize: scale(FONT_SMALL), fontFamily: 'Comfortaa-Bold', color: Colors.BLACK }}
                                         placeholder={placeholder}
                                         keyboardType="phone-pad" />
                                 </View>
                                 <View style={{ padding: moderateScale(DEFAUTL_SPACE) }}>
-                                    <AIcon name="check" color={username.length < 10 ? Colors.WHITE : Colors.BLACK} size={moderateScale(moderateScale(ICON_SIZE))} />
+                                    <AIcon name="check" color={phoneNumber.length < 10 ? Colors.WHITE : Colors.BLACK} size={moderateScale(moderateScale(ICON_SIZE))} />
                                 </View>
                             </View>
                             <View>
@@ -88,8 +107,8 @@ export default function Auth(props: { navigation: { push: Function } }) {
                             </View>
                         </View>
                         <View style={[styles.button_container, { marginVertical: 10, }]}>
-                            <Pressable onPress={e => props.navigation.push('Home')} style={({ pressed }) => [
-                                { transform: [{ scale: pressed ? 0.94 : 1 },], borderRadius: BORDER_RADIUS, padding: moderateScale(DEFAUTL_SPACE), backgroundColor: username.length < 10 ? Colors.GREY.LIGHT : Colors.PRIMARY }, styles.button
+                            <Pressable onPress={e => signInWithPhoneNumber()} style={({ pressed }) => [
+                                { transform: [{ scale: pressed ? 0.94 : 1 },], borderRadius: BORDER_RADIUS, padding: moderateScale(DEFAUTL_SPACE), backgroundColor: phoneNumber.length < 10 ? Colors.GREY.LIGHT : Colors.PRIMARY }, styles.button
                             ]}>
                                 <Text style={{ color: Colors.WHITE, fontFamily: 'Comfortaa-Bold', fontSize: scale(FONT_SMALL) }}>Continue</Text>
                             </Pressable>
@@ -176,6 +195,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    spinnerTextStyle: {
+        color: '#FFF'
     },
     button: {
         flex: 1,
